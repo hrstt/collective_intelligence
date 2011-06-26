@@ -65,8 +65,19 @@ def sim_pearson(prefs, person1, person2)
 end
 
 
+def top_matches(prefs, person, n=5, metric=:sim_pearson)
+  m = Object.method(metric)
+  scores = prefs.keys.collect {|other|
+    [m.call(prefs, person, other), other] if other != person
+  }.compact
+  
+  scores.sort.reverse[0,n]
+end
+
 
 if __FILE__ == $0
   p sim_distance(PCIData.critics, 'Lisa Rose', 'Gene Seymour')
   p sim_pearson(PCIData.critics, 'Lisa Rose', 'Gene Seymour')
+  
+  p top_matches(PCIData.critics, 'Toby')
 end
