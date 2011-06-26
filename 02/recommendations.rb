@@ -4,6 +4,7 @@ require '../lib/PCIData.rb'
 require '../lib/Misc.rb'
 require 'set'
 
+# return common key name set
 def common_key_set(prefs, k1, k2)
   si = Set.new
   prefs[k1].each_key {|item| si.add(item) if prefs[k2].key?(item)}
