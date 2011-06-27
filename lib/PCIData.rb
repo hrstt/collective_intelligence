@@ -14,7 +14,19 @@ class PCIData
       'Toby'=> {'Snakes on a Plane'=>4.5,'You, Me and Dupree'=>1.0,'Superman Returns'=>4.0}
     }
   end
-  
+
+  def self.movies
+    result = Hash.new
+    prefs = self.critics
+    prefs.each_key do |person|
+      prefs[person].each_key do |item|
+        result[item] ||= Hash.new
+        result[item][person] = prefs[person][item]
+      end
+    end
+    result
+  end
+
   # chapter 3
   def self.dropwords
     ['a','new','some','more','my','own','the','many','other','another']
