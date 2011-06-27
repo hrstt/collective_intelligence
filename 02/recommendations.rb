@@ -31,11 +31,8 @@ def sim_pearson(prefs, person1, person2)
   
   # sum pu all the preferences
   
-  l1 = lambda {|item| prefs[person1][item]}
-  l2 = lambda {|item| prefs[person2][item]}
-  
-  collection1 = si.collect(&l1)
-  collection2 = si.collect(&l2)
+  collection1 = si.collect {|item| prefs[person1][item]}
+  collection2 = si.collect {|item| prefs[person2][item]}
   
   # sum up all the preferences
   sum1 = collection1.sum
