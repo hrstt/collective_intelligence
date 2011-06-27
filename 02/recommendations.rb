@@ -104,5 +104,5 @@ if __FILE__ == $0
   p Recommendations.new.get_recommendations(PCIData.critics, 'Toby', :sim_distance)
   
   p Recommendations.new.top_matches(PCIData.movies, 'Superman Returns')
-  p Recommendations.new.top_matches(PCIData.movies, 'Just My Luck')
+  p Recommendations.new.get_recommendations(PCIData.movies, 'Just My Luck')
 end
