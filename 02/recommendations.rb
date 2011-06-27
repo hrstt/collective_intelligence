@@ -92,6 +92,29 @@ class Recommendations
     rankings.sort.reverse
   end
 
+  def transform_prefs(prefs)
+    result = Hash.new
+    prefs.each_key do |person|
+      prefs[person].each_key do |item|
+        result[item] ||= Hash.new
+        result[item][person] = prefs[person][item]
+      end
+    end
+    result
+  end
+
+  def calculate_similar_items(prefs, n=10, metric=:sim_pearson)
+    result = Hash.new
+    c = 0
+    prefs_size = prefs.size
+    prefs.each_key do |item|
+      c += 1
+      p "%d / %d " % [c, prefs_size] if (c % 100).zero?
+      sources = top_matches(prefs, item, metric)
+      result[item] = sources
+    end
+    result
+  end
 end
 
 
@@ -105,4 +128,6 @@ if __FILE__ == $0
   
   p Recommendations.new.top_matches(PCIData.movies, 'Superman Returns')
   p Recommendations.new.get_recommendations(PCIData.movies, 'Just My Luck')
+  
+  p Recommendations.new.calculate_similar_items(PCIData.movies)
 end
