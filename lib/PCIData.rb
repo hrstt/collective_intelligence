@@ -1,6 +1,9 @@
 #-*- coding:utf-8 -*-
 
 class PCIData
+  def self.lib_dir
+    File.expand_path(File.dirname(__FILE__))
+  end
 
   # chapter 2
   def self.critics
@@ -33,7 +36,7 @@ class PCIData
   end
 
   def self.feed_list
-    File.readlines('feedlist.txt').select{|line| line.chomp!}
+    File.readlines(self.lib_dir + '/feedlist.txt').select{|line| line.chomp!}
   end
   
   # chapter 5
@@ -57,7 +60,7 @@ class PCIData
   end
 
   def self.schedule
-    File.readlines('schedule.txt').inject(Hash.new()) {|hash, item |
+    File.readlines(self.lib_dir + '/schedule.txt').inject(Hash.new()) {|hash, item |
       origin,dest,depart,arrive,price = item.chomp!.split(',')
       hash[[origin,dest]] = [] if hash[[origin,dest]].nil?
       hash[[origin,dest]] << [depart, arrive, price.to_i]
@@ -114,19 +117,19 @@ class PCIData
   end
 
   def self.addresslist
-    File.readlines('addresslist.txt').select {|item| item.chomp!}
+    File.readlines(self.lib_dir + '/addresslist.txt').select {|item| item.chomp!}
   end
 
 
   # chapter 9
   def self.matchmaker
     require 'csv'    
-    CSV.readlines('matchmaker.csv')
+    CSV.readlines(self.lib_dir + '/matchmaker.csv')
   end
   
 end
 
 if __FILE__ == $0
   
-  p PCIData.matchmaker
+  # p PCIData.feed_list
 end
