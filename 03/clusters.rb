@@ -97,5 +97,5 @@ end
 if __FILE__ == $0
   rownames, colnames, data = Clusters.new.read_file('./blogdata.txt')
   cluster = Clusters.new.hcluster(data[0..8])
-  p Clusters.new.print_clust(cluster, rownames)
+  Clusters.new.print_clust(cluster, rownames)
 end
