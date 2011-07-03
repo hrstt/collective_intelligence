@@ -1,14 +1,18 @@
 #-*- coding:utf-8 -*-
 class Array
   def sum
-    self.inject(0) {|sum, value| sum += value}
+    self.inject(0) {|sum, v| sum += v}
+  end
+  
+  def product
+    self.inject(0) {|sum, v| sum += v}
   end
   
   def sum_of_square
-    self.inject(0) {|sum, value| sum = sum + (value**2)}
+    self.inject(0) {|sum, v| sum = sum + (v**2)}
   end
   
-  def product(other)
+  def sum_of_product(other)
     self_enum = self.to_enum
     other_enum = other.to_enum
     
@@ -16,7 +20,7 @@ class Array
     loop do
       result << self_enum.next * other_enum.next
     end
-    result
+    result.sum
   end
 end
 
