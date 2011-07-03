@@ -8,6 +8,10 @@ class Array
     self.inject(0) {|sum, v| sum += v}
   end
   
+  def each_sum(other)
+    self.zip(other).collect{|s, o| s + o}
+  end
+  
   def sum_of_square
     self.inject(0) {|sum, v| sum = sum + (v**2)}
   end
