@@ -22,6 +22,17 @@ class Array
     end
     result.sum
   end
+  
+  def variant
+    self.sum_of_square - (self.sum ** 2) / self.size
+  end
+
+  def pearson(other)    
+    den = Math.sqrt(self.variant * other.variant)
+    return 0 if den.zero?
+    
+    (self.sum_of_product(other) - (self.sum*other.sum / self.size)) / den
+  end
 end
 
 def normalize_rank(n)

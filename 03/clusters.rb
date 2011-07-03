@@ -20,28 +20,27 @@ class Clusters
   end
   
   def pearson(v1, v2)
-    sum1 = v1.sum
-    sum2 = v2.sum
-    sum1_sq = v1.sum_of_square
-    sum2_sq = v2.sum_of_square
-    product_sum = v1.product(v2).sum
-    
-    n = v1.size
-    
-    den = Math.sqrt((sum1_sq-(sum1**2)/n)*(sum2_sq-(sum2**2)/n))
-    return 0 if den.zero?
-
     # reverse indicator of pearson
-    1 - (product_sum - (sum1*sum2/n))/den
-    
-    
+    1 - v1.pearson(v2)
   end
   
+end
+
+class Bicluster
+  def initialize(vec, id=nil, left=nil, right=nil, distance=0.0)
+    @vec = vec
+    @id = id
+    @left = left
+    @right = right
+    @distance = distance
+  end
+  attr_accessor :vec, :id, :left, :right, :distance
 end
 
 if __FILE__ == $0
   rownames, colnames, data = Clusters.new.read_file('./blogdata.txt')
   
   p Clusters.new.pearson(data[1],data[4])
+  p Clusters.new.hcluster(data)
   
 end
