@@ -10,7 +10,7 @@ class GenerateFeedVector
     open(rss) do |file|
       feed = RSS::Parser.parse(file.read)
 
-      title = feed.channel.description
+      title = feed.channel.description.chomp!
       
       feed.items.each do |item|
 
