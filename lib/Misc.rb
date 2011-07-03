@@ -7,11 +7,15 @@ class Array
   def product
     self.inject(0) {|sum, v| sum += v}
   end
-  
+    
   def each_sum(other)
     self.zip(other).collect{|s, o| s + o}
   end
-  
+
+  def each_average(other, n)
+    self.zip(other).collect{|s, o| s + o / n}
+  end
+
   def sum_of_square
     self.inject(0) {|sum, v| sum = sum + (v**2)}
   end
@@ -31,7 +35,7 @@ class Array
     self.sum_of_square - (self.sum ** 2) / self.size
   end
 
-  def pearson(other)    
+  def pearson(other)
     den = Math.sqrt(self.variant * other.variant)
     return 0 if den.zero?
     
