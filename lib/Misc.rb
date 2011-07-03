@@ -1,3 +1,4 @@
+#-*- coding:utf-8 -*-
 class Array
   def sum
     self.inject(0) {|sum, value| sum += value}

@@ -1,3 +1,5 @@
+#-*- coding:utf-8 -*-
+
 require '../lib/Misc.rb'
 
 class Clusters
