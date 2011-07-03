@@ -65,6 +65,18 @@ class Clusters
     clust[0]
   end
 
+  def print_clust(clust, labels=nil, n=0)
+    line = '  ' * n
+    line += if clust.leaf?
+      if labels then labels[clust.id] else clust.id end
+    else
+      '-'
+    end
+    p line
+    print_clust(clust.left, labels, n+1) if clust.left
+    print_clust(clust.right, labels, n+1) if clust.right
+  end
+
 end
 
 class Bicluster
@@ -84,6 +96,6 @@ end
 
 if __FILE__ == $0
   rownames, colnames, data = Clusters.new.read_file('./blogdata.txt')
-  p cluster = Clusters.new.hcluster(data[0..8])
-  
+  cluster = Clusters.new.hcluster(data[0..8])
+  p Clusters.new.print_clust(cluster, rownames)
 end

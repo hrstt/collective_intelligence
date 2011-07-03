@@ -39,7 +39,7 @@ class Array
     den = Math.sqrt(self.variant * other.variant)
     return 0 if den.zero?
     
-    (self.sum_of_product(other) - (self.sum*other.sum / self.size)) / den
+    (self.sum_of_product(other) - (self.sum * other.sum / self.size)) / den
   end
 end
 
