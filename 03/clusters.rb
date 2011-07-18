@@ -1,5 +1,5 @@
 #-*- coding:utf-8 -*-
-
+require 'cairo'
 require '../lib/Misc.rb'
 
 class Clusters
@@ -75,6 +75,40 @@ class Clusters
     p line
     print_clust(clust.left, labels, n+1) if clust.left
     print_clust(clust.right, labels, n+1) if clust.right
+  end
+
+  def get_height(clust)
+  end
+  
+  def get_depth(clust)
+  end
+  
+  def draw_node(context, clust, x, y, scaling, labels)
+    h_l = get_height(clust.left) * 20
+    h_r = get_height(clust.right) * 20
+    
+  end
+  
+  def draw_dendrogram(clust, labels, png='clusters.png')
+    h = getheight(clust)*20
+    w = 1200
+    depth = getdepth(clust)
+    
+    scaling = (w-300)/depth.to_f
+    
+    surface = Cairo::ImageSurface.new(w,h)
+    context = Cairo.Context.new(surface)
+    context.set_source_rgb(1,1,1)
+    context.recatangle(0,0,w,w)
+    context.fill
+    
+    context.move_to(0, h/2)
+    context.line_to(10, h/2)
+    context.stroke
+    
+    draw_node(context, clust, h2, scaling, labels)
+    
+    surface.write_to_png(png)
   end
 
 end

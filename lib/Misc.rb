@@ -1,11 +1,11 @@
 #-*- coding:utf-8 -*-
 class Array
   def sum
-    self.inject(0) {|sum, v| sum += v}
+    self.inject(0) {|sum, v| sum + v}
   end
   
   def product
-    self.inject(0) {|sum, v| sum += v}
+    self.inject(1) {|sum, v| sum * v}
   end
     
   def each_sum(other)
@@ -17,7 +17,7 @@ class Array
   end
 
   def sum_of_square
-    self.inject(0) {|sum, v| sum = sum + (v**2)}
+    self.inject(0) {|sum, v| sum + (v**2)}
   end
   
   def sum_of_product(other)

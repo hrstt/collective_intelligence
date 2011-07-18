@@ -62,7 +62,7 @@ class PCIData
   def self.schedule
     File.readlines(self.lib_dir + '/schedule.txt').inject(Hash.new()) {|hash, item |
       origin,dest,depart,arrive,price = item.chomp!.split(',')
-      hash[[origin,dest]] = [] if hash[[origin,dest]].nil?
+      hash[[origin,dest]] ||= []
       hash[[origin,dest]] << [depart, arrive, price.to_i]
       hash
     }
